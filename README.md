@@ -35,10 +35,10 @@ El sistema está compuesto por tres módulos principales:
 
 ```
 azzar/
-├── tienda-web/         # Aplicación React + Tailwind CSS (compra de boletos)
-├── admin-panel/        # Aplicación Next.js (panel de administración)
-├── backend/            # API REST en Spring Boot
-├── agente-inteligente/ # Servicio en Python (determinación del ganador)
+├── azzar-frontend/         # Aplicación React + Tailwind CSS (compra de boletos)
+├── administrador-frontend/        # Aplicación Next.js (panel de administración)
+├── azzar-backend/            # API REST en Spring Boot
+├── agente/ # Servicio en Python (determinación del ganador)
 └── README.md
 ```
 
@@ -56,7 +56,7 @@ azzar/
 ### Tienda web
 
 ```bash
-cd tienda-web
+cd azzar-frontend
 npm install
 npm run dev
 ```
@@ -64,7 +64,7 @@ npm run dev
 ### Panel de administración
 
 ```bash
-cd admin-panel
+cd administrador-frontend
 npm install
 npm run dev
 ```
@@ -72,24 +72,16 @@ npm run dev
 ### Backend
 
 ```bash
-cd backend
+cd azzar-backend
 ./mvnw spring-boot:run
 ```
 
 ### Agente inteligente
 
 ```bash
-cd agente-inteligente
-pip install -r requirements.txt
+cd agente
+pip install
 python main.py
 ```
-
-> Completá las variables de entorno necesarias (conexión a base de datos, credenciales de pago, URLs de los servicios, etc.) antes de levantar cada módulo.
-
-## 👤 Autor
-
-Proyecto universitario desarrollado en 2025.
-
-## 📄 Licencia
 
 Este proyecto fue desarrollado con fines académicos.
