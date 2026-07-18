@@ -1,0 +1,205 @@
+import { useState, useEffect, useContext } from "react";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import closeIcon from '../assets/svg/close.svg'
+import IniciarSesion from "./IniciarSesion";
+import CrearCuenta from "./CrearCuenta";
+import { CartContext } from "../context/CarritoContext";
+import './css/Navbar.css';
+
+function Navbar() {
+  const [modal, setModal] = useState(null);
+  const [usuario, setUsuario] = useState(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const { cart, isCartOpen, setIsCartOpen, removeTicket, clearCart } = useContext(CartContext);
+
+  const Inicio = () => {
+    navigate("/");
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwt_decode(token);
+        setUsuario(decoded);
+      } catch (err) {
+        console.error("Token inválido");
+        localStorage.removeItem("token");
+      }
+    }
+  }, []);
+
+  const cerrarSesion = () => {
+    localStorage.removeItem("token");
+    setUsuario(null);
+    window.location.reload();
+  };
+
+  const irPedidos = () => {
+    navigate("/pagos/checkout");
+  };
+
+  const total = cart.reduce((acc, ticket) => acc + Number(ticket.PRECIO || 0), 0);
+
+  const irPagar = async () =>  {
+    try {
+
+      if (cart.length === 0) {
+        alert("Tu carrito está vacío.");
+        return;
+      }
+
+      const idRifas = cart.map(p => p.ID_RIFA);
+
+      const body = {
+        idCliente: usuario.idCliente,
+        rifasLista: idRifas
+      };
+
+      const response = await fetch("http://148.230.72.52:8080/v1/azzar/pagos/reservar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+
+      if(response.ok){
+        const data = await response.json();
+        console.log("Reservas creadas:", data);
+        clearCart();
+        setIsCartOpen(false);
+        navigate("/pagos/checkout");
+      }else{
+        const errorText = await response.text();
+        console.error("Error al reservar rifas:", errorText);
+      }
+
+    } catch (error) {
+      console.error("Error en ir a pagar: ", error);
+    }
+  };
+
+  return (
+    <>
+      <nav className="navbar">
+        <div className="navbar-container">
+          <h1 className="navbar-logo cursor-pointer" onClick={Inicio}>Azzar</h1>
+          <div className="navbar-links">
+            <span className="item-account inicio" onClick={Inicio}>Inicio</span>
+            {usuario ? (
+              <>
+                {/* Usuario */}
+                <div className="usuario-menu-container">
+                  <span 
+                    className="item-account usuario-trigger"
+                    onClick={() => setMenuOpen(!menuOpen)}
+                  >
+                    {usuario.nombreCliente}
+                    <span className="material-symbols-outlined icono">
+                      arrow_drop_down
+                    </span>
+                  </span>
+                  {menuOpen && (
+                    <div className="usuario-dropdown">
+                      <span onClick={() => irPedidos()} className="dropdown-item">
+                        Mis pedidos
+                      </span>
+                      <span onClick={cerrarSesion} className="dropdown-item">
+                        Cerrar sesión
+                      </span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Carrito */}
+                <span 
+                  className="item-account carrito-trigger"
+                  onClick={() => setIsCartOpen(!isCartOpen)}
+                >
+                  <span className="material-symbols-outlined icono">
+                    shopping_cart
+                  </span>
+                  Mi Carrito ({cart.length})
+                </span>
+              </>
+            ) : (
+              <>
+                <span onClick={() => setModal("signup")} className="item-account">Crear cuenta</span>
+                <span onClick={() => setModal("login")} className="item-account">Iniciar sesión</span>
+              </>
+            )}
+          </div>
+        </div>
+      </nav>
+
+      {/* Panel del carrito */}
+      {isCartOpen && (
+        <div className="cart-panel">
+          <div className="cart-header">
+            <h3 className="carrito-title">Mi Carrito</h3>
+            <div className='close-container-carrito'>
+                <button className='close-btn' onClick={() => setIsCartOpen(false)}>
+                  <img src={closeIcon} />
+                </button>
+            </div>
+          </div>
+          <div className="items-carrito-container">
+            {cart.length > 0 ? (
+              <>
+                <ul className="carrito-list-item">
+                  {cart.map((ticket) => (
+                    <li className="carrito-item" key={ticket.ID_RIFA}>
+                      <div className="carrito-item-container">
+                        <div className="btn-eliminar-container">
+                          <button onClick={() => removeTicket(ticket.ID_RIFA)}>
+                            <span class="material-symbols-outlined delete-icon">
+                              delete
+                            </span>
+                          </button>
+                        </div>
+                        <div className="info-rifa-container">
+                          <div className="info-rifa-title-container"><span>{ticket.NOMBRE_PREMIO}</span></div>
+                          <div className="info-rifa-descripcion-container">
+                            <span>Rifa #{ticket.NOMENCLATURA}</span>
+                          </div>
+                        </div>
+                        <div className="info-rifa-precio-container">
+                          <span>{Number(ticket.PRECIO).toLocaleString('es-PY')}Gs</span>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="btn-continuar-pago-container">
+                  <button onClick={() => irPagar()}>
+                    <span className="pago-title">Ir a pagar</span>
+                    <span className="monto">{total.toLocaleString('es-PY')}Gs</span>
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="carrito-vacio-container">
+                  <span className="material-symbols-outlined carrito-icon">
+                    shopping_cart
+                  </span>
+                  <span className="carrito-vacio-text">
+                    Tu carrito esta vacio 
+                  </span>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {modal === "login" && <IniciarSesion onClose={() => setModal(null)} />}
+      {modal === "signup" && <CrearCuenta onClose={() => setModal(null)} />}
+    </>
+  );
+}
+
+export default Navbar;

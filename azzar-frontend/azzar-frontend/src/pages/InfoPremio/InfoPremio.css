@@ -1,0 +1,409 @@
+.info-container{
+    width: 100%;
+    min-height: 45vh;
+    margin: auto;
+    z-index: 5;
+
+    background: transparent;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: end;
+}
+
+.info-container-header{
+    display: flex;
+    width: 80%;
+    margin: auto;
+    height: 100%;
+    padding: 20px;
+    align-items: center;
+    border-bottom: 1px solid #202020;
+    gap: 20px;
+}
+
+.info-container-header-img {
+  width: 300px;       /* ancho del card */
+  height: 200px;     /* alto fijo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff; /* opcional: color de fondo si hay espacios */
+}
+
+.info-container-header-img img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* mantiene la imagen completa sin recortar */
+}
+
+.info-container-header-text{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.info-container-header-text h3{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.info-container-header-text p{
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.info-container-header-text span{
+    font-size: 16px;
+}
+
+.rifas-container{
+    display: flex;
+    align-items: end;
+    width: 100%;
+    margin: auto;
+}
+
+.rifas-container-header{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: auto;
+    height: 100%;
+}
+
+.rifas-container-header h3{
+    color: #202020;
+    font-weight: 700;
+}
+
+.title-rifas-container {
+  position: relative;
+  top: -30px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.rifas-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.ticket {
+  color: #202020;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 50%;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ticket:hover{
+  transform: scale(1.1);
+}
+
+.ticket.disponible { background: #ffffff;   border: 1px solid #202020;}
+.ticket.pagado { background: #ae2f2f; cursor: not-allowed;  border: 1px solid #ae2f2f; color: #fff;}
+.ticket.seleccionado {
+  border: 1px solid #202020;
+  color: #fff;
+  background-color: #202020;
+}
+
+.ticket-menu {
+  position: absolute;
+  background: #fff;
+  padding: 12px 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  z-index: 20;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.ticket-menu::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; /* coloca la flecha abajo de la burbuja */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 10px 10px 0 10px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+.ticket-menu button {
+  margin: 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.ticket-number {
+  display: block;
+  font-size: 10px;
+}
+
+.ticket-tooltip {
+  position: absolute;
+  top: -70px; /* sube la nube arriba */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  font-size: 12px;
+  color: #202020;
+  white-space: nowrap;
+  z-index: 100;
+}
+
+.ticket-tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 8px 8px 0 8px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent;
+}
+
+.estados-rifas-container {
+  position: relative;
+  display: flex;
+  gap: 10px;
+}
+
+.estados-rifas-list{
+  display: flex;
+  gap: 10px;
+  background-color: #f2f2f2;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.estados-item{
+  display: flex;
+  gap: 5px;
+}
+
+.estados-text{
+  font-size: 14px;
+  font-weight: 500;
+  color: #202020;
+}
+
+
+/* ===================================================================== */
+/* 📱📱 RESPONSIVE DESIGN – INFO PREMIO                                   */
+/* ===================================================================== */
+
+
+/* ===================================================================== */
+/* 💻 Tablet (entre 768px – 1024px)                                      */
+/* ===================================================================== */
+@media (max-width: 1024px) {
+
+  .info-container-header {
+    width: 90%;
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  .info-container-header-img {
+    width: 250px;
+    height: 180px;
+  }
+
+  .info-container-header-text h3 {
+    font-size: 22px;
+  }
+
+  .rifas-container-header {
+    width: 90%;
+  }
+
+  .rifas-list {
+    justify-content: center;
+  }
+
+  .ticket {
+    padding: 12px;
+    font-size: 12px;
+  }
+}
+
+
+/* ===================================================================== */
+/* 📱 Mobile grande (480px – 768px)                                      */
+/* ===================================================================== */
+@media (max-width: 768px) {
+
+  .info-container {
+    align-items: start;
+    padding-top: 100px; /* evita que el navbar lo tape */
+  }
+
+  .info-container-header {
+    width: 90%;
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+    padding-bottom: 30px;
+  }
+
+  .info-container-header-img {
+    width: 220px;
+    height: 160px;
+  }
+
+  .info-container-header-text {
+    align-items: center;
+  }
+
+  .info-container-header-text h3 {
+    font-size: 22px;
+  }
+
+  .info-container-header-text p {
+    font-size: 14px;
+    max-width: 90%;
+  }
+
+  .info-container-header-text span {
+    font-size: 14px;
+  }
+
+  .title-rifas-container {
+    top: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .estados-rifas-list {
+    width: fit-content;
+  }
+
+  .rifas-list {
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .ticket {
+    padding: 12px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .ticket-number {
+    font-size: 10px;
+  }
+
+  .ticket-tooltip {
+    top: -65px;
+  }
+
+  .estados-rifas-container {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .estados-rifas-list{
+    display: flex;
+    width: 100%;
+  }
+}
+
+
+/* ===================================================================== */
+/* 📱 Mobile pequeño (280px – 480px)                                     */
+/* ===================================================================== */
+@media (max-width: 480px) {
+
+  .info-container-header {
+    width: 92%;
+    padding: 15px;
+  }
+
+  .info-container-header-img {
+    width: 200px;
+    height: 150px;
+  }
+
+  .estados-rifas-container {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .info-container-header-text h3 {
+    font-size: 20px;
+  }
+
+  .info-container-header-text p {
+    font-size: 13px;
+  }
+
+  .info-container-header-text span {
+    font-size: 13px;
+  }
+
+  .title-rifas-container {
+    top: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .title-rifas {
+    font-size: 18px;
+  }
+
+  .estados-rifas-list {
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .estados-item {
+    align-items: center;
+  }
+
+  .estados-text {
+    font-size: 12px;
+  }
+
+  .rifas-list {
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .ticket {
+    width: 42px;
+    height: 42px;
+    padding: 8px;
+    font-size: 11px;
+  }
+
+  .ticket-number {
+    font-size: 9px;
+  }
+
+  .ticket-tooltip {
+    top: -60px;
+    font-size: 11px;
+  }
+}

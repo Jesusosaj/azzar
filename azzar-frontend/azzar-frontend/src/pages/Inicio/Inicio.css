@@ -1,0 +1,334 @@
+/* Seccion inicio */
+
+.inicio-container {
+  width: 100%;
+  min-height: 80vh;
+  margin: auto;
+  z-index: 5;
+
+  background: transparent;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+
+.inicio-container-header{
+  display: flex;
+  width: 80%;
+  margin: auto;
+  height: 100%;
+  align-items: center;
+}
+
+.inicio-container-header-info{
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 30px;
+}
+
+.inicio-container-header-info-h3 {
+  font-size: 32px;
+  font-weight: 600;
+  background: linear-gradient(90deg, #232323, #000000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  text-align: center;
+}
+
+.inicio-container-header-info-h2 {
+  font-size: 64px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #36d1dc, #5b86e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+  letter-spacing: 2px;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.inicio-container-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 40px;
+  max-width: 400px;
+}
+
+.inicio-container-header-info-h2 {
+  animation-delay: 0.2s;
+}
+
+.inicio-container-header-collage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 120px;
+  gap: 10px;
+  justify-items: center;
+  align-items: center;
+}
+
+.collage-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.collage-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.collage-item:hover .collage-img {
+  transform: scale(1.05);
+}
+
+.collage-text {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.collage-item.size1 { grid-column: span 2; grid-row: span 2; }
+.collage-item.size3 { grid-column: span 1; grid-row: span 2; }
+.collage-item.size4 { grid-column: span 1; grid-row: span 2; }
+
+
+
+/* Eventos */
+
+.eventos-container{
+  width: 100%;
+  min-height: 80vh;
+  z-index: 5;
+
+  background: #fcfdff;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.eventos-container-header{
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0;
+}
+
+.eventos-container-header-h2{
+  font-size: 20px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #232323, #000000);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+.eventos-container-main{
+  display: flex;
+  flex-direction: column;
+}
+
+.eventos-container-main-list{
+  margin-top: 50px;
+}
+
+/* Items de premios */
+.eventos-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s;
+  cursor: pointer;
+  gap: 7px;
+  text-decoration: none;
+}
+
+.eventos-img-container {
+  width: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.eventos-img-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px 10px 0 0;
+}
+
+.eventos-item:hover {
+  transform: translateY(-5px);
+}
+
+.eventos-item-text{
+  padding: 20px;
+}
+
+.eventos-item-title {
+  color: #202020;
+  font-size: 18px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.eventos-item-ubicacion {
+  color: #202020;
+  font-size: 12px;
+  text-decoration: none;
+  font-weight: 300;
+}
+
+/* Lista de items */
+.eventos-container-main-list-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+
+
+
+
+/* 📱 Responsive design */
+@media (max-width: 992px) {
+  .inicio-container-header {
+    flex-direction: column;
+    width: 90%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .inicio-container-header-collage {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 100px;
+  }
+
+  .inicio-container-header-info {
+    padding: 0;
+    max-width: 100%;
+    align-items: center;
+  }
+
+  .inicio-container-header-info-h3 {
+    font-size: 32px;
+  }
+
+  .inicio-container-header-info-h2 {
+    font-size: 64px;
+  }
+
+  .eventos-container-header {
+    width: 90%;
+  }
+
+  .eventos-container-main-list-content {
+    justify-content: center;
+  }
+
+  .eventos-img-container {
+    width: 280px;
+  }
+}
+
+/* 📱 Móviles: ocultar imágenes del collage y centrar solo texto */
+@media (max-width: 768px) {
+  .inicio-container {
+    min-height: 60vh;
+    justify-content: center;
+  }
+
+  .inicio-container-header {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .inicio-container-header-collage {
+    display: none; /* 🔥 Ocultamos las imágenes */
+  }
+
+  .inicio-container-header-info {
+    padding: 0;
+    text-align: center;
+  }
+
+  .inicio-container-header-info-h3 {
+    font-size: 48px;
+  }
+
+  .inicio-container-header-info-h2 {
+    font-size: 64px;
+    letter-spacing: 1px;
+  }
+
+  .eventos-container-header-h2 {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .eventos-item {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .eventos-img-container {
+    width: 100%;
+  }
+
+  .eventos-item-text {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .eventos-container-main-list-content {
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+/* 📱 Extra pequeño (celulares chicos) */
+@media (max-width: 480px) {
+  .inicio-container-header-info-h3 {
+    font-size: 38px;
+  }
+
+  .inicio-container-header-info-h2 {
+    font-size: 48px;
+  }
+
+  .eventos-item {
+    max-width: 260px;
+  }
+
+  .eventos-item-title {
+    font-size: 16px;
+  }
+
+  .eventos-item-ubicacion {
+    font-size: 11px;
+  }
+}
